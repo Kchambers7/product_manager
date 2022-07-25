@@ -34,3 +34,16 @@ module.exports.getOneProduct = (req, res) => {
     .then(prod => res.json(prod))
     .catch(err => res.json(err));
 };
+
+module.exports.updateProduct = (req, res) => {
+  Product.findOneAndUpdate({ _id: req.params._id }, req.body, { runValidators: true })
+    .then( () => res.json({msg: "Update successful"}))
+    .catch(err => res.json(err));
+};
+
+
+module.exports.deleteProduct = (req, res) => {
+  Product.deleteOne({_id: req.params._id})
+    .then(deleteConfirmation => res.json(deleteConfirmation))
+    .catch(err => res.json(err))
+};
